@@ -1,4 +1,5 @@
 import countries from "./countries.json";
+import { getRandom } from "../tools";
 
 export interface CountryInfo {
   name: string;
@@ -22,8 +23,4 @@ export function getCountryByName(countryName: string): Promise<CountryInfo[]> {
         x.fullName.toLocaleLowerCase().startsWith(searchText)
     );
   });
-}
-
-function getRandom(min: number, max: number) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
