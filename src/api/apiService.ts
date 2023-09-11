@@ -1,13 +1,8 @@
 import countries from "./countries.json";
 import { getRandom } from "../tools";
+import { Country } from "./models/Country";
 
-export interface CountryInfo {
-  name: string;
-  fullName: string;
-  flag: string;
-}
-
-export function getCountryByName(countryName: string): Promise<CountryInfo[]> {
+export const getCountryByName = (countryName: string): Promise<Country[]> => {
   return new Promise((resolve) => {
     setTimeout(resolve, getRandom(100, 800));
   }).then(() => {
@@ -23,4 +18,4 @@ export function getCountryByName(countryName: string): Promise<CountryInfo[]> {
         x.fullName.toLocaleLowerCase().startsWith(searchText)
     );
   });
-}
+};

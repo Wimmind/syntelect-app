@@ -1,16 +1,15 @@
 import { makeAutoObservable } from "mobx";
 
 import { IButtonViewModel, ButtonViewModel } from "./ButtonViewModel";
-import { ControlModel } from "./models/ControlModel";
 
 interface IControlViewModel {
-  controlModel: ControlModel;
+  value: string;
   leftButtons: ButtonViewModel[];
   rightButtons: ButtonViewModel[];
 }
 
 export class ControlViewModel {
-  private _controlModel: IControlViewModel["controlModel"];
+  value: IControlViewModel["value"];
   leftButtons: IControlViewModel["leftButtons"];
   rightButtons: IControlViewModel["rightButtons"];
 
@@ -18,7 +17,7 @@ export class ControlViewModel {
     leftButtons: IButtonViewModel[],
     rightButtons: IButtonViewModel[]
   ) {
-    this._controlModel = new ControlModel();
+    this.value = "";
 
     this.leftButtons = leftButtons.map(
       ({ title, callback }) => new ButtonViewModel(title, callback)
@@ -31,11 +30,7 @@ export class ControlViewModel {
     makeAutoObservable(this);
   }
 
-  get value() {
-    return this._controlModel.value;
-  }
-
   setValue = (value: string) => {
-    this._controlModel.setValue(value);
+    this.value = value;
   };
 }
